@@ -28,7 +28,7 @@
               <h3>All Accounts</h3>
             </div>
             <div class="col">
-              <a href="#"><button class="btn btn-primary float-right">+ Account</button></a>
+              <a href="/api/accounts/addAccount"><button class="btn btn-primary float-right">+ Account</button></a>
             </div>
           </div>
         
