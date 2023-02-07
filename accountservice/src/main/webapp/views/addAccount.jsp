@@ -13,58 +13,37 @@
   <body>
     
 
-    <div class="container">
-      <div class="row">
-        <div class="col-12 col-md-6 mx-auto">
-          <h1>Accounts Service</h1>
-        </div>
-      </div>
-
-      <div class="row mt-5">
-        <div class="col-12 mx-auto">
-
-          <div class="row">
-            <div class="col">
-              <h3>All Accounts</h3>
-            </div>
-            <div class="col">
-              <a href="#"><button class="btn btn-primary float-right">+ Account</button></a>
-            </div>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <h2 class="text-center mb-5">Add Account</h2>
+            <form>
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Enter name">
+              </div>
+              <div class="form-group">
+                <label for="minAmount">Minimum Amount</label>
+                <input type="number" class="form-control" id="minAmount" placeholder="Enter minimum amount">
+              </div>
+              <div class="form-group">
+                <label for="type">Type</label>
+                <select class="form-control" id="type">
+                  <option value="savings">Savings</option>
+                  <option value="current">Current</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="dateAdded">Date Added</label>
+                <input type="date" class="form-control" id="dateAdded">
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <a href="/api/accounts/" class="btn btn-success">All Accounts</a>
+            </form>
           </div>
-        
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Min Amount</th>
-                <th scope="col">Type</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry the Bird</td>
-                <td>@twitter</td>
-              </tr>
-            </tbody>
-          </table>
-          
         </div>
       </div>
-    </div>
+      
 
     <!-- Optional JavaScript; choose one of the two! -->
 

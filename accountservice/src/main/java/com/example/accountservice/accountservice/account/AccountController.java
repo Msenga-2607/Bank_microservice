@@ -13,6 +13,12 @@ public class AccountController {
     return "home";
    }
 
+
+   @GetMapping("/addAccount")
+    public String addAccountPage(){
+        return "addAccount";
+    }
+
     //to be accessed from customer service
    @GetMapping("/customer")
     public String home(){
