@@ -164,5 +164,9 @@ public class CustomerController {
 		return "redirect:/customers";
 	}
 
+	public String addCustomerAccounts(){
+		return "redirect:/customers";
+	}
+
 	
 }
