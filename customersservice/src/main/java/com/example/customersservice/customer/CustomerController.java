@@ -2,17 +2,35 @@ package com.example.customersservice.customer;
 
 import java.sql.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 
 
 @Controller
 public class CustomerController {
 	String usernameforclass = "";
+	private RestTemplate restTemplate;
+
+	@Autowired
+  public CustomerController(RestTemplateBuilder restTemplateBuilder) {
+    this.restTemplate = restTemplateBuilder.build();
+  }
+
+  @GetMapping("/hello")
+  public String hello() {
+    String url = "http://localhost:8003/api/loans/hello";
+    ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
+    return response.getBody();
+  }
+	
     @GetMapping("/")
 	public String loginUserPage(Model model){
 		return "index";
