@@ -3,7 +3,6 @@ package com.example.accountservice.accountservice.account;
 import java.sql.*;
 import java.util.Random;
 
-import org.springframework.boot.autoconfigure.amqp.RabbitProperties.Cache.Connection;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 //@RequestMapping("/api/accounts")
 public class AccountController {
-    Integer balanace = 10000;
+    Integer balance = 10000;
 
     @GetMapping("/")//working
    public String homePage(){
@@ -43,14 +42,14 @@ public class AccountController {
 
         try
 		{
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/accountservice","root","");
 			Statement stmt = con.createStatement();
 			
 			PreparedStatement pst = con.prepareStatement("insert into accounts(customer_id,account_number,balance) values(?,?,?);");
-			pst.setString(1, customer_id);
-			pst.setString(2, sex);
-			pst.setString(3, dob);
+			pst.setString(1, idString);
+			pst.setInt(2, number);
+			pst.setInt(3, balance);
 			int rowsAffected = pst.executeUpdate();
 		}
 		catch(Exception e)
