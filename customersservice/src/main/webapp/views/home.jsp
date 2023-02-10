@@ -63,7 +63,7 @@
                   <form action="customer/update" method="get">
                     <input type="hidden" name="customer_id" value="<%=rs.getInt(1)%>">
                     <input type="submit" value="U" class="btn btn-success btn-sm">
-                    <a href="#" class="btn btn-warning btn-sm">+</a>
+                    <a href="/create/customer/account/<%= rs.getString(1) %>" class="btn btn-warning btn-sm">+</a>
                 </form>
                 </td>
               </tr>

@@ -16,29 +16,20 @@
     <div class="container">
       <div class="row">
         <div class="col-12 col-md-6 mx-auto">
-          <h1>Accounts Service</h1>
+          <h1>Customer Accounts</h1>
         </div>
       </div>
 
       <div class="row mt-5">
         <div class="col-12 mx-auto">
 
-          <div class="row">
-            <div class="col">
-              <h3>All Accounts</h3>
-            </div>
-            <div class="col">
-              <a href="/api/accounts/addAccount"><button class="btn btn-primary float-right">+ Account</button></a>
-            </div>
-          </div>
-        
           <table class="table table-bordered">
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Min Amount</th>
-                <th scope="col">Type</th>
+                <th scope="col">Customer</th>
+                <th scope="col">Number</th>
+                <th scope="col">Balance</th>
               </tr>
             </thead>
             <tbody>
@@ -47,17 +38,6 @@
                 <td>Mark</td>
                 <td>Otto</td>
                 <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry the Bird</td>
-                <td>@twitter</td>
               </tr>
             </tbody>
           </table>

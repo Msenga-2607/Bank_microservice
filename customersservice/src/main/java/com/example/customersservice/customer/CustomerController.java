@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,9 +25,10 @@ public class CustomerController {
     this.restTemplate = restTemplateBuilder.build();
   }
 
-  @GetMapping("/hello")
-  public String hello() {
-    String url = "http://localhost:8003/api/loans/hello";
+  //create customer accounts
+  @GetMapping("/create/customer/account/{id}")
+  public String creatCustomerAccount(@PathVariable("id") Long id) {
+    String url = "http://localhost:8001/api/create/customeraccount/" + id;
     ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
     return response.getBody();
   }
@@ -38,11 +40,13 @@ public class CustomerController {
 
     @GetMapping("/home")
 	public String index(Model model) {
+
+		//check if user logged in
 		if(usernameforclass.equalsIgnoreCase(""))
 			return "userLogin";
 		else {
 			model.addAttribute("username", usernameforclass);
-			return "home";
+			return "/";
 		}
 			
 	}
