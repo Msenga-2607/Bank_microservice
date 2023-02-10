@@ -46,7 +46,7 @@ public class CustomerController {
 			return "userLogin";
 		else {
 			model.addAttribute("username", usernameforclass);
-			return "/";
+			return "home";
 		}
 			
 	}

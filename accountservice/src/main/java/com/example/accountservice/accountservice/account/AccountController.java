@@ -56,7 +56,7 @@ public class AccountController {
 		{
 			System.out.println("Exception:"+e);
 		}
-        return "home heloooo";
+        return "home";
     }
    
 }
