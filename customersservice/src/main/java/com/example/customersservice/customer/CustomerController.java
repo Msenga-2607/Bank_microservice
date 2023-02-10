@@ -16,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Controller
 public class CustomerController {
-	String usernameforclass = "";
+		String usernameforclass = "";
 	private RestTemplate restTemplate;
 
 	@Autowired
@@ -78,19 +78,19 @@ public class CustomerController {
 
 	@RequestMapping(value = "addcustomer", method=RequestMethod.POST)
 	public String addCustomer(@RequestParam("name") String name,
-	@RequestParam("gender") String gender,
+	@RequestParam("sex") String sex,
 	@RequestParam("dob") String dob,
 	@RequestParam("phone_number") String phone_number,
 	@RequestParam("email") String email){
 
 		try
 		{
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/customer_managements","root","");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/customerservice","root","");
 			Statement stmt = con.createStatement();
 			
-			PreparedStatement pst = con.prepareStatement("insert into customers(name,gender,dob,phone_number,email) values(?,?,?,?,?);");
+			PreparedStatement pst = con.prepareStatement("insert into customers(fullname,sex,email,phone_number) values(?,?,?,?);");
 			pst.setString(1,name);
-			pst.setString(2, gender);
+			pst.setString(2, sex);
 			pst.setString(3, dob);
 			pst.setString(4, phone_number);
 			pst.setString(5, email);
@@ -122,27 +122,25 @@ public class CustomerController {
 		  } catch (Exception e) {
 			System.out.println("Exception:" + e);
 		  }
-		String name,gender,dob,email;
+		String fullname,sex,email;
 		int customer_id,phone_number;
 		try
 		{
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/customer_managements","root","");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/customerservice","root","");
 			Statement stmt = con.createStatement();
 			ResultSet rst = stmt.executeQuery("select * from customers where id = "+idStr+";");
 			
 			if(rst.next())
 			{
 			customer_id = rst.getInt(1);
-			name = rst.getString(2);
-			gender = rst.getString(3);
-			dob = rst.getString(4);
-			phone_number = rst.getInt(5);
-			email =  rst.getString(6);
+			fullname = rst.getString(2);
+		sex = rst.getString(3);
+				email =  rst.getString(4);
+		phone_number = rst.getInt(5);
 			model.addAttribute("customer_id",customer_id);
-			model.addAttribute("name",name);
-			model.addAttribute("gender",gender);
-			model.addAttribute("dob",dob);
+			model.addAttribute("name",fullname);
+		model.addAttribute("gender",sex);
 			model.addAttribute("phone_number",phone_number);
 			model.addAttribute("email",email);
 			}
