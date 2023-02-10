@@ -48,6 +48,7 @@
 						ResultSet rs = stmt.executeQuery("select * from customers");
 					%>
 					<%
+          
 					while (rs.next()) {
 					%>
 
