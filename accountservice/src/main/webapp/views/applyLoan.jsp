@@ -1,8 +1,3 @@
-<%@page import="java.sql.*"%>
-<%@page import="java.util.*"%>
-<%@page import="java.text.*"%>
-
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -18,64 +13,43 @@
   <body>
     
 
-    <div class="container">
-      <div class="row">
-        <div class="col-12 col-md-6 mx-auto">
-          <h1>Customer Accounts</h1>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <h2 class="text-center mb-5">Apply Loan</h2>
+            <form action="" method="POST">
+              <div class="form-group">
+                <label for="Amount">Amount</label>
+                <input type="text" class="form-control" id="Amount" placeholder="Enter amount required">
+              </div>
+              <div class="form-group">
+                <label for="">Purpose</label>
+                <select class="form-control" id="">
+                <option selected disabled>Select purpose</option>
+                  <option value="Education">Education</option>
+                  <option value="Home Improvement">Home Improvement</option>
+                  <option value="Business">Business</option>
+                  <option value="Emergency">Emergency</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="">Credit history</label>
+                <select class="form-control" id="">
+                <option selected disabled>Select credit history</option>
+                  <option value="New">New</option>
+                  <option value="Good">Good</option>
+                  <option value="Avarege">Avarege</option>
+                  <option value="Excellent">Excellent</option>
+                </select>
+              </div>
+              <input type="hidden" name="status" value="pending">
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <a href="/api/accounts/" class="btn btn-success">All Accounts</a>
+            </form>
+          </div>
         </div>
       </div>
-
-      <div class="row mt-5">
-        <div class="col-12 mx-auto">
-
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Customer</th>
-                <th scope="col">Number</th>
-                <th scope="col">Balance</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-
-              <%
-              try {
-                String url = "jdbc:mysql://localhost:3306/accountservice";
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection con = DriverManager.getConnection(url, "root", "");
-                Statement stmt = con.createStatement();
-                ResultSet rs = stmt.executeQuery("select * from accounts");
-              %>
-              <%
-              int count = 1;
-              while (rs.next()) {
-              %>
-
-              <tr>
-                <th scope="row"><%= count++ %></th>
-                <td><%= rs.getString(2) %></td>
-                <td><%= rs.getString(3) %></td>
-                <td><%= rs.getString(4) %></td>
-                <td>
-                  <a href="/appyloan/9" class="btn btn-primary btn-sm">Apply loan</a>
-                </td>
-              </tr>
-
-              <% } %>
-            </tbody>
-          </table>
-
-          <%
-		} catch (Exception ex) {
-		out.println("Exception Occurred:: " + ex.getMessage());
-		}
-		%>
-          
-        </div>
-      </div>
-    </div>
+      
 
     <!-- Optional JavaScript; choose one of the two! -->
 

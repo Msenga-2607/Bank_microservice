@@ -16,30 +16,22 @@
     <div class="container">
       <div class="row">
         <div class="col-12 col-md-6 mx-auto">
-          <h1>Bank Loans Service</h1>
+          <h1>All Customer Loans</h1>
         </div>
       </div>
 
       <div class="row mt-5">
         <div class="col-12 mx-auto">
-
-          <div class="row">
-            <div class="col">
-              <h3>All Accounts</h3>
-            </div>
-            <div class="col">
-              <a href="#"><button class="btn btn-primary float-right">+ Loans</button></a>
-            </div>
-          </div>
         
           <table class="table table-hover">
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Type</th>
-                <th scope="col">balance</th>
                 <th scope="col">Customer</th>
-                <th scope="col">Action</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Purpose</th>
+                <th scope="col">Credit History</th>
+                <th scope="col">Status</th>
               </tr>
             </thead>
             <tbody>
@@ -48,19 +40,6 @@
                 <td>Mark</td>
                 <td>Otto</td>
                 <td>@mdo</td>
-                <td></td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td></td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
                 <td></td>
               </tr>
             </tbody>

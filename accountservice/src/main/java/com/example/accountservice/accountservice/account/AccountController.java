@@ -3,16 +3,27 @@ package com.example.accountservice.accountservice.account;
 import java.sql.*;
 import java.util.Random;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 
 @Controller
 //@RequestMapping("/api/accounts")
 public class AccountController {
     Integer balance = 10000;
+
+    private RestTemplate restTemplate;
+
+	@Autowired
+  public AccountController(RestTemplateBuilder restTemplateBuilder) {
+    this.restTemplate = restTemplateBuilder.build();
+  }
 
     @GetMapping("/")//working
    public String homePage(){
@@ -58,5 +69,18 @@ public class AccountController {
 		}
         return "home";
     }
+
+    @GetMapping("/appyloan/{id}")
+    public String applyLoanPage(){
+        return "applyLoan";
+    }
+
+    //add loan to loan service
+  @GetMapping("/apply/customer/loan/{id}")
+  public String applyCustomerLoan(@PathVariable("id") Long id) {
+    String url = "http://localhost:8001/api/create/loanapplication/" + id;
+    ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
+    return response.getBody();
+  }
    
 }
