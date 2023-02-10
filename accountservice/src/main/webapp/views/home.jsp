@@ -87,7 +87,7 @@
       </div>
       <div class="modal-body">
         <h2 class="text-center mb-5">Apply Loan</h2>
-        <form action="applyLoan" method="post">
+        <form action="applyloanform" method="post">
           <input type="hidden" name="customer_id" value="<%= rs.getString(2) %>">
           <input type="hidden" name="name" value="<%= rs.getString(3) %>">
           <div class="form-group">

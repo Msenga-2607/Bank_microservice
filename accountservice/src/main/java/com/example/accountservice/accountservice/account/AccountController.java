@@ -1,5 +1,8 @@
 package com.example.accountservice.accountservice.account;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.sql.*;
 import java.util.Random;
 
@@ -87,7 +90,7 @@ public class AccountController {
   }
 
 
-  @RequestMapping(value = "applyLoan", method=RequestMethod.POST)
+  @RequestMapping(value = "applyloanform", method=RequestMethod.POST)
 	public String addCustomer(@RequestParam("customer_id") String customer_id,
 	@RequestParam("name") String name,
 	@RequestParam("amount") String amount,
@@ -95,9 +98,19 @@ public class AccountController {
   @RequestParam("credit_history") String credit_history,
   @RequestParam("status") String status){
 
-		try
-		{
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/loanservice","root","");
+		try {
+      // Send a request to the loan service
+      URL url = new URL("http://localhost:8003/");
+      HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+      connection.setRequestMethod("GET");
+      int statusCode = connection.getResponseCode();
+
+      // If the response is 200 OK, the service is on
+      if (statusCode == 200) {
+  
+    try
+  {
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/loanservice","root","");
 			Statement stmt = con.createStatement();
 			
 			PreparedStatement pst = con.prepareStatement("insert into loans(customer_id,name,amount,purpose,credit_history,status) values(?,?,?,?,?,?);");
@@ -108,14 +121,25 @@ public class AccountController {
 			pst.setString(5, credit_history);
       pst.setString(6, "pending");
 			int rowsAffected = pst.executeUpdate();
-		}
-		catch(Exception e)
-		{
-			System.out.println("Exception:"+e);
-		}
 
-		return "redirect:/?status=1";
-		
-	}
+    if (rowsAffected > 0) {
+      return "redirect:/?status=1";
+    } else {
+      return "redirect:/?status=0";
+    }
+  }
+  catch(Exception e)
+  {
+    System.out.println("Exception:"+e);
+  }
+          return "redirect:redirect:/home?status=1";
+      } else {
+          return "serviceoff";
+      }
+  } catch (IOException e) {
+      // If an exception is thrown, the service is off
+      return "serviceoff";
+  }
    
+}
 }

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @Controller
-//@RequestMapping("/api/loans")
 public class LoanController {
     String usernameforclass = "";
     Integer loan_id = 1;
