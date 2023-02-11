@@ -23,6 +23,16 @@
       <div class="card">
         <h5 class="card-header">Customers</h5>
         <div class="card-body m-2">
+          <%
+    String status = request.getParameter("status");
+      if (status != null) { %>
+      <div class="alert alert-primary" role="alert">
+        Customer Account registered successfully
+      </div>
+
+      <%
+          }
+      %>
           <h5 class="card-title">All Customers</h5>
 
           <table class="table table-sm">
@@ -63,8 +73,8 @@
                   <!-- <button class="btn btn-primary btn-sm mr-1">update</button> -->
                   <form action="customer/update" method="get">
                     <input type="hidden" name="customer_id" value="<%=rs.getInt(1)%>">
-                    <input type="submit" value="U" class="btn btn-success btn-sm">
-                    <a href="/create/customer/account/<%= rs.getString(1) %>" class="btn btn-warning btn-sm">+</a>
+                    <!-- <input type="submit" value="U" class="btn btn-success btn-sm"> -->
+                    <a href="/create/customer/account/<%= rs.getString(1) %>/<%= rs.getString(2) %>" class="btn btn-success btn-sm">Add Acc</a>
                 </form>
                 </td>
               </tr>

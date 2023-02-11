@@ -17,6 +17,7 @@
         <div class="row justify-content-center">
           <div class="col-md-6">
             <h2 class="text-center mb-5">Apply Loan</h2>
+            
             <form action="" method="POST">
               <div class="form-group">
                 <label for="Amount">Amount</label>

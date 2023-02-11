@@ -70,8 +70,9 @@ public class AccountController {
         return "home";
     }
 
-    @GetMapping("/appyloan/{id}")
-    public String applyLoanPage(){
+    @GetMapping("/appyloan/{id}/{name}")
+    public String applyLoanPage(@PathVariable int id, 
+    @PathVariable String name){
         return "applyLoan";
     }
 

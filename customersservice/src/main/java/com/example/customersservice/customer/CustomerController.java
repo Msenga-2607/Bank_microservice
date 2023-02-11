@@ -1,6 +1,10 @@
 package com.example.customersservice.customer;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.sql.*;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -25,8 +29,57 @@ public class CustomerController {
     this.restTemplate = restTemplateBuilder.build();
   }
 
+//check account service availability
+  @GetMapping("/create/customer/account/{id}/{name}")
+    public String checkAccountServiceStatus(@PathVariable int id, 
+	@PathVariable String name) {
+    try {
+        // Send a request to the student service
+        URL url = new URL("http://localhost:8001/");
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("GET");
+        int statusCode = connection.getResponseCode();
+
+        // If the response is 200 OK, the service is on
+        if (statusCode == 200) {
+			Random random = new Random();
+        int number = (int) (random.nextDouble() * (int) (Math.pow(10, 13)));
+        //System.out.println(number);
+			try
+		{
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/accountservice","root","");
+			Statement stmt = con.createStatement();
+			
+			PreparedStatement pst = con.prepareStatement("insert into accounts(customer_id,fullname,account_number,balance) values(?,?,?,?);");
+			pst.setInt(1,id);
+			pst.setString(2, name);
+            pst.setInt(3, number);
+			pst.setInt(4, 10000);
+			int rowsAffected = pst.executeUpdate();
+
+			if (rowsAffected > 0) {
+				return "redirect:/home?status=1";
+			} else {
+				return "redirect:/home?status=0";
+			}
+		}
+		catch(Exception e)
+		{
+			System.out.println("Exception:"+e);
+		}
+            return "redirect:redirect:/home?status=1";
+        } else {
+            return "serviceoff";
+        }
+    } catch (IOException e) {
+        // If an exception is thrown, the service is off
+        return "serviceoff";
+    }
+   }
+
   //create customer accounts
-  @GetMapping("/create/customer/account/{id}")
+  @GetMapping("/createww/customer/account/{id}/{name}")
   public String creatCustomerAccount(@PathVariable("id") Long id) {
     String url = "http://localhost:8001/api/create/customeraccount/" + id;
     ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
@@ -43,7 +96,7 @@ public class CustomerController {
 
 		//check if user logged in
 		if(usernameforclass.equalsIgnoreCase(""))
-			return "userLogin";
+			return "index";
 		else {
 			model.addAttribute("username", usernameforclass);
 			return "home";
@@ -55,7 +108,7 @@ public class CustomerController {
     public String userlogin(@RequestParam("username") String username,
     @RequestParam("password") String pass,Model model) {
         try{
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/springproject","root","");
 			Statement stmt = con.createStatement();
 			ResultSet rst = stmt.executeQuery("select * from users where username = '"+username+"' and password = '"+pass+"' ;");
@@ -144,7 +197,7 @@ public class CustomerController {
 		phone_number = rst.getInt(5);
 			model.addAttribute("customer_id",customer_id);
 			model.addAttribute("name",fullname);
-		model.addAttribute("gender",sex);
+			model.addAttribute("gender",sex);
 			model.addAttribute("phone_number",phone_number);
 			model.addAttribute("email",email);
 			}

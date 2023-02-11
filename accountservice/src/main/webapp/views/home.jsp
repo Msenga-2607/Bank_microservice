@@ -2,7 +2,8 @@
 <%@page import="java.util.*"%>
 <%@page import="java.text.*"%>
 
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
   <head>
@@ -55,13 +56,62 @@
 
               <tr>
                 <th scope="row"><%= count++ %></th>
-                <td><%= rs.getString(2) %></td>
                 <td><%= rs.getString(3) %></td>
                 <td><%= rs.getString(4) %></td>
+                <td><%= rs.getString(5) %></td>
                 <td>
-                  <a href="/appyloan/9" class="btn btn-primary btn-sm">Apply loan</a>
+                  <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal<%= rs.getString(1) %>">Apply loan</a>
+                  
                 </td>
               </tr>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal<%= rs.getString(1) %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Apply Loan</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h2 class="text-center mb-5">Apply Loan</h2>
+        <form action="" method="post">
+          <input type="hidden" name="student_id" value="<%= rs.getString(2) %>">
+          <div class="form-group">
+            <label for="Amount">Amount:</label>
+            <input type="text" class="form-control" id="Amount" name="amount" placeholder="Enter amount required">
+          </div>
+          <div class="form-group">
+            <label for="Purpose">Purpose:</label>
+            <select class="form-control" id="Purpose" name="purpose">
+              <option selected disabled>Select purpose</option>
+              <option value="Education">Education</option>
+              <option value="Home Improvement">Home Improvement</option>
+              <option value="Business">Business</option>
+              <option value="Emergency">Emergency</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="CreditHistory">Credit History:</label>
+            <select class="form-control" id="CreditHistory" name="credit_history">
+              <option selected disabled>Select credit history</option>
+              <option value="New">New</option>
+              <option value="Good">Good</option>
+              <option value="Average">Average</option>
+              <option value="Excellent">Excellent</option>
+            </select>
+          </div>
+          <input type="hidden" name="status" value="pending">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
               <% } %>
             </tbody>
