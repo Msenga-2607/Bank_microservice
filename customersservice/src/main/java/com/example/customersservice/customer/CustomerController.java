@@ -109,9 +109,9 @@ public class CustomerController {
     @RequestParam("password") String pass,Model model) {
         try{
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/springproject","root","");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/staffservice","root","");
 			Statement stmt = con.createStatement();
-			ResultSet rst = stmt.executeQuery("select * from users where username = '"+username+"' and password = '"+pass+"' ;");
+			ResultSet rst = stmt.executeQuery("select * from staffs where username = '"+username+"' and password = '"+pass+"' ;");
 			if(rst.next()) {
 				usernameforclass = rst.getString(2);
 				return "redirect:/home";

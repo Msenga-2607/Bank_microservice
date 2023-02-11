@@ -1,3 +1,9 @@
+<%@page import="java.sql.*"%>
+<%@page import="java.util.*"%>
+<%@page import="java.text.*"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
   <head>
@@ -28,7 +34,7 @@
               <h3>All Staffs</h3>
             </div>
             <div class="col">
-              <a href="#"><button class="btn btn-primary float-right">+ Staff</button></a>
+              <a href="/addstaff"><button class="btn btn-primary float-right">+ Staff</button></a>
             </div>
           </div>
         
@@ -36,35 +42,39 @@
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Type</th>
-                <th scope="col">balance</th>
-                <th scope="col">Customer</th>
+                <th scope="col">Fullname</th>
+                <th scope="col">Position</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
+              <%
+              try {
+                String url = "jdbc:mysql://localhost:3306/staffservice";
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                Connection con = DriverManager.getConnection(url, "root", "");
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery("select * from staffs");
+              %>
+              <%
+              int count = 1;
+              while (rs.next()) {
+              %>
               <tr>
                 <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <td><%= rs.getString(2) %></td>
+                <td><%= rs.getString(4) %></td>
                 <td></td>
               </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td></td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-                <td></td>
-              </tr>
+              <% } %>
             </tbody>
           </table>
+
+          <%
+		} catch (Exception ex) {
+		out.println("Exception Occurred:: " + ex.getMessage());
+		}
+		%>
           
         </div>
       </div>
