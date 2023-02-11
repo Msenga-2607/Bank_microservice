@@ -44,7 +44,7 @@ public class CustomerController {
         if (statusCode == 200) {
 			Random random = new Random();
         int number = (int) (random.nextDouble() * (int) (Math.pow(10, 13)));
-        //System.out.println(number);
+        
 			try
 		{
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -148,9 +148,8 @@ public class CustomerController {
 			PreparedStatement pst = con.prepareStatement("insert into customers(fullname,sex,email,phone_number) values(?,?,?,?);");
 			pst.setString(1,name);
 			pst.setString(2, sex);
-			pst.setString(3, dob);
+			pst.setString(3, email);
 			pst.setString(4, phone_number);
-			pst.setString(5, email);
 			int rowsAffected = pst.executeUpdate();
 		}
 		catch(Exception e)

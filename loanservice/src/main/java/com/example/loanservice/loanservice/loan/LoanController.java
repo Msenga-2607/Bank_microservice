@@ -64,10 +64,6 @@ public class LoanController {
            
            PreparedStatement pst = con.prepareStatement("insert into loans(customer_id,amount,purpose,credit_history,status) values(?,?,?,?,?);");
            pst.setString(1, idString);
-           pst.setInt(2, number);
-           pst.setInt(3, balance);
-           pst.setInt(4, balance);
-           pst.setInt(5, balance);
            int rowsAffected = pst.executeUpdate();
        }
        catch(Exception e)

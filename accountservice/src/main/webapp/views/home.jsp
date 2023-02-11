@@ -77,15 +77,16 @@
       </div>
       <div class="modal-body">
         <h2 class="text-center mb-5">Apply Loan</h2>
-        <form action="" method="post">
-          <input type="hidden" name="student_id" value="<%= rs.getString(2) %>">
+        <form action="applyLoan" method="post">
+          <input type="hidden" name="customer_id" value="<%= rs.getString(2) %>">
+          <input type="hidden" name="name" value="<%= rs.getString(3) %>">
           <div class="form-group">
             <label for="Amount">Amount:</label>
-            <input type="text" class="form-control" id="Amount" name="amount" placeholder="Enter amount required">
+            <input type="text" class="form-control" name="amount" placeholder="Enter amount required">
           </div>
           <div class="form-group">
             <label for="Purpose">Purpose:</label>
-            <select class="form-control" id="Purpose" name="purpose">
+            <select class="form-control" name="purpose">
               <option selected disabled>Select purpose</option>
               <option value="Education">Education</option>
               <option value="Home Improvement">Home Improvement</option>

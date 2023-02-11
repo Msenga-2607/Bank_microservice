@@ -41,9 +41,8 @@
                 <th scope="col">#</th>
                 <th scope="col">NAME</th>
                 <th scope="col">GENDER</th>
-                <th scope="col">DOB</th>
-                <th scope="col">PHONE</th>
                 <th scope="col">EMAIL</th>
+                <th scope="col">PHONE</th>
                 <th></th>
               </tr>
             </thead>
@@ -51,24 +50,23 @@
 
               <%
 					try {
-						String url = "jdbc:mysql://localhost:3306/customer_managements";
+						String url = "jdbc:mysql://localhost:3306/customerservice";
 						Class.forName("com.mysql.cj.jdbc.Driver");
 						Connection con = DriverManager.getConnection(url, "root", "");
 						Statement stmt = con.createStatement();
 						ResultSet rs = stmt.executeQuery("select * from customers");
 					%>
 					<%
-          
+          int count = 1;
 					while (rs.next()) {
 					%>
 
               <tr>
-                <td><%= rs.getString(1) %></td>
+                <td><%= count++ %></td>
                 <td><%= rs.getString(2) %></td>
                 <td><%= rs.getString(3) %></td>
                 <td><%= rs.getString(4) %></td>
                 <td><%= rs.getString(5) %></td>
-                <td><%= rs.getString(6) %></td>
                 <td>
                   <!-- <button class="btn btn-primary btn-sm mr-1">update</button> -->
                   <form action="customer/update" method="get">

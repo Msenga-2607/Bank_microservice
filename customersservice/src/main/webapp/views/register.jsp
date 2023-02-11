@@ -40,7 +40,7 @@
 
               <div class="row mt-2">
                 <div class="col">
-                  <select name="gender" class="form-control">
+                  <select name="sex" class="form-control">
                     <option selected>Select Gender</option>
                     <option value="F">Female</option>
                     <option value="M">Male</option>
