@@ -114,7 +114,7 @@ public class AccountController {
 			System.out.println("Exception:"+e);
 		}
 
-		return "redirect:/";
+		return "redirect:/?status=1";
 		
 	}
    

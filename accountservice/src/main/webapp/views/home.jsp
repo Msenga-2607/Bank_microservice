@@ -22,6 +22,16 @@
     <div class="container">
       <div class="row">
         <div class="col-12 col-md-6 mx-auto">
+          <%
+    String status = request.getParameter("status");
+      if (status != null) { %>
+      <div class="alert alert-primary m-3" role="alert">
+        Customer Loan Submitted successfull
+      </div>
+
+      <%
+          }
+      %>
           <h1>Customer Accounts</h1>
         </div>
       </div>

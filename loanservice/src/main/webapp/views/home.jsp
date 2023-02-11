@@ -1,3 +1,9 @@
+<%@page import="java.sql.*"%>
+<%@page import="java.util.*"%>
+<%@page import="java.text.*"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en">
   <head>
@@ -35,15 +41,37 @@
               </tr>
             </thead>
             <tbody>
+
+              <%
+              try {
+                String url = "jdbc:mysql://localhost:3306/loanservice";
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                Connection con = DriverManager.getConnection(url, "root", "");
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery("select * from loans");
+              %>
+              <%
+              int count = 1;
+              while (rs.next()) {
+              %>
               <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td></td>
+                <th scope="row"><%= count++ %></th>
+                <td><%= rs.getString(3) %></td>
+                <td><%= rs.getString(4) %></td>
+                <td><%= rs.getString(5) %></td>
+                <td><%= rs.getString(6) %></td>
+                <td><%= rs.getString(7) %></td>
               </tr>
+
+              <% } %>
             </tbody>
           </table>
+
+          <%
+		} catch (Exception ex) {
+		out.println("Exception Occurred:: " + ex.getMessage());
+		}
+		%>
           
         </div>
       </div>
